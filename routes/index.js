@@ -91,6 +91,18 @@ router.get('/index/newProject',function (req, res) {
     })
 })
 
+//居家商品展示
+router.get('/livingHome/goodsList',function (req, res) {
+    const sql = 'SELECT * FROM  commodity WHERE category = "category_1" AND categorydetail = '+ req.query.type;
+    mysql.dbConnection(sql,[],function (err,data) {
+        res.send({
+            data: data,
+            message: 'success',
+            status: 0,
+        });
+    })
+})
+
 
 
 
