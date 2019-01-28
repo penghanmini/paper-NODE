@@ -1,1 +1,0 @@
-SELECT * FROM smallimg WHERE category = "category_0" AND categorydetail = 1

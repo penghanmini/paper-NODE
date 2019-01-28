@@ -1,1 +1,0 @@
-SELECT * FROM category WHERE category = "category_1" AND secondCate != 0
