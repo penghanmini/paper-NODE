@@ -50,7 +50,6 @@ router.get('/carousel', function(req, res) {
 router.get('/categoryList', function(req, res) {
     if(req.query.category){
         const sql = 'SELECT * FROM category WHERE category = "' + req.query.category + '" AND secondCate != 0';
-        console.log(sql);
         mysql.dbConnection(sql,[],function (err,data) {
             res.send({
                 data: data,
@@ -62,11 +61,38 @@ router.get('/categoryList', function(req, res) {
     else{
         res.send({
             data: null,
-            message: '未传入类别',
+            message: '类别为空',
             status: 1,
         });
     }
 });
+//商品详情
+router.get('/productDetail',function (req, res) {
+    if(req.query.id){
+        const sql1 = 'select * from commodity where id = ' + req.query.id;
+        mysql.dbConnection(sql1,[],function (err1,data1) {
+            const sql2 = 'select * from detailimg where id = ' + req.query.id;
+            mysql.dbConnection(sql2,[],function (err2,data2) {
+                data1.imgUrl = JSON.stringify(data2);
+                res.send({
+                    data: {
+                        data:data1[0],
+                        imgUrl: data2,
+                    },
+                    message: 'success',
+                    status: 0,
+                })
+            })
+        })
+    }
+    else{
+        res.send({
+            data: null,
+            message: '商品ID未空',
+            status: 1,
+        });
+    }
+})
 
 //首页集市
 router.get('/index/market',function (req, res) {
