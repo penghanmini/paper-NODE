@@ -3,7 +3,28 @@ var router = express.Router();
 var mysql = require('./sqlUtil');
 
 /* GET home page. */
-
+router.post('/login',function (req,res) {
+    console.log(req["body"]);
+    res.send({
+        data:req["body"],
+        code: 200,
+    })
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST","http://192.168.3.18:8080/monitor-platform/login" , true);
+    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // xhr.onreadystatechange = function() {
+    //     if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+    //         return xhr.responseText;
+    //     }
+    // };
+    // var data =  {
+    //     account:'admin',
+    //     password:'admin',
+    // };
+    // data = JSON.stringify(data);
+    // console.log(data);
+    // xhr.send(data);
+})
 //导航栏
 router.get('/category', function(req, res) {
     const sql = 'SELECT * FROM category WHERE secondCate = 0';
@@ -125,9 +146,16 @@ router.get('/livingHome/goodsList',function (req, res) {
             data: data,
             message: 'success',
             status: 0,
-        });
+        }); 
     })
 })
+
+// var fs = require("");
+// var stat = fs.lstatSync("./js");
+// if(stat.isDirectory()){
+//
+// }
+
 
 
 
